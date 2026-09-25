@@ -90,4 +90,19 @@ public class VendingMachineTest {
     void testRemoveItemInvalidCode(){
         assertThrows(VendingMachineException.class, () -> machine.removeItem("F"));
     }
+
+    @Test
+    void testInsertMoneyPositive(){
+        machine.insertMoney(5.00);
+        assertEquals(5.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testInsertMoneyMultiple(){
+        machine.insertMoney(5.00);
+        machine.insertMoney(3.00);
+        machine.insertMoney(0.23);
+
+        assertEquals(8.23, machine.getBalance(), 0.001);
+    }
 }
