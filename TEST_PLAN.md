@@ -13,3 +13,5 @@
 | getPrice | Retrieve stored item price | N/A | Price = 0 | Should return supplied price | testGetPrice(), testGetPriceZero() |
 | VendingMachineException() | Construct an exception | N/A | N/A | A VendingMachineException object should be created | testVendingMachineException() |
 | VendingMachineException(reason) | Construct an exception with a message | N/A | Empty string | getMessage() should be able to get the reason | testVendingMachineExceptionMessage() |
+
+The test that will be parameterized is addItemInvalidCode(), this has a very strong boundary which can allow for multiple meaningful tests along it, and all 6 tests should have the same result, causing an exception.
