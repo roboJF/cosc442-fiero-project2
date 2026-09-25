@@ -47,13 +47,47 @@ public class VendingMachineTest {
     @Test
     void testAddItemOccupied() {
         VendingMachineItem pepsi = new VendingMachineItem("Pepsi", 1.48);
-
         machine.addItem(coke, "B");
 
         assertThrows(VendingMachineException.class, () -> machine.addItem(pepsi, "B"));
-
         //this is to make sure that the item in the slot isnt replaced for whatever reason
         assertSame(coke, machine.getItem("B"));
     }
 
+    @Test
+    void testGetItem(){
+        machine.addItem(coke, "A");
+        VendingMachineItem r = machine.getItem("A");
+        assertSame(coke, r);
+    }
+
+    @Test
+    void testGetItemEmpty(){
+        VendingMachineItem r = machine.getItem("D");
+        assertNull(r);
+    }
+
+    @Test
+    void testGetItemInvalidCode(){
+        assertThrows(VendingMachineException.class, () -> machine.getItem("c"));
+    }
+
+    @Test
+    void testRemoveItem() {
+        machine.addItem(coke, "A");
+        VendingMachineItem remove = machine.removeItem("A");
+
+        assertSame(coke, remove);
+        assertNull(machine.getItem("A"));
+    }
+
+    @Test
+    void testRemoveItemEmpty(){
+        assertThrows(VendingMachineException.class, () -> machine.removeItem("A"));
+    }
+
+    @Test
+    void testRemoveItemInvalidCode(){
+        assertThrows(VendingMachineException.class, () -> machine.removeItem("F"));
+    }
 }
