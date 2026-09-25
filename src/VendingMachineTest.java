@@ -105,4 +105,86 @@ public class VendingMachineTest {
 
         assertEquals(8.23, machine.getBalance(), 0.001);
     }
+
+    @Test
+    void testInsertMoneyZero(){
+        machine.insertMoney(0.00);
+        assertEquals(0.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testInsertMoneyNegative(){
+        assertThrows(VendingMachineException.class, () -> machine.insertMoney(-5.00));
+        assertEquals(0.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testGetBalanceNew(){
+        assertEquals(0.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testGetBalanceAfterInsertion(){
+        machine.insertMoney(10.00);
+        assertEquals(10.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testMakePurchase(){
+        machine.addItem(coke, "C");
+        machine.insertMoney(5.00);
+
+        assertTrue(machine.makePurchase("C"));
+        assertNull(machine.getItem("C"));
+        assertEquals(3.51, machine.getBalance(), 0.001);
+    }
+
+    @Test 
+    void testMakePurchaseInsufficient(){
+        machine.addItem(coke, "C");
+        machine.insertMoney(1);
+
+        assertFalse(machine.makePurchase("C"));
+        assertSame(coke, machine.getItem("C"));
+        assertEquals(1.00, machine.getBalance(), 0.001);
+    }
+
+    //this wasnt in my TEST_PLAN.md, i realized i should've added it while writing these
+    //i dont really want to go back and edit it since to me, the plan should be set in stone, so whoops!
+    @Test
+    void testMakePurchaseExact(){
+        machine.addItem(coke, "B");
+        machine.insertMoney(1.49);
+
+        assertTrue(machine.makePurchase("B"));
+        assertNull(machine.getItem("B"));
+        assertEquals(0.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testMakePurchaseInvalidCode(){
+        assertThrows(VendingMachineException.class, () -> machine.makePurchase("E"));
+    }
+
+    @Test
+    void testMakePurchaseEmpty(){
+        machine.insertMoney(5.00);
+
+        assertFalse(machine.makePurchase("D"));
+        assertEquals(5.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testReturnChange(){
+        machine.insertMoney(5.00);
+
+        assertEquals(5.00, machine.returnChange(), 0.001);
+        assertEquals(0.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testReturnChangeZero(){
+        assertEquals(0.00, machine.returnChange(), 0.001);
+        assertEquals(0.00, machine.getBalance(), 0.001);
+    }
 }
