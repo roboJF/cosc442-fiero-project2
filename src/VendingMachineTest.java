@@ -55,6 +55,11 @@ public class VendingMachineTest {
     }
 
     @Test
+    void testAddItemNullCode() {
+        assertThrows(VendingMachineException.class, () -> machine.addItem(coke, null));
+    }
+
+    @Test
     void testGetItem(){
         machine.addItem(coke, "A");
         VendingMachineItem r = machine.getItem("A");
@@ -70,6 +75,11 @@ public class VendingMachineTest {
     @Test
     void testGetItemInvalidCode(){
         assertThrows(VendingMachineException.class, () -> machine.getItem("c"));
+    }
+
+    @Test
+    void testGetItemNullCode() {
+        assertThrows(VendingMachineException.class, () -> machine.addItem(coke, null));
     }
 
     @Test
@@ -89,6 +99,11 @@ public class VendingMachineTest {
     @Test
     void testRemoveItemInvalidCode(){
         assertThrows(VendingMachineException.class, () -> machine.removeItem("F"));
+    }
+
+    @Test
+    void testRemoveItemNullCode(){
+        assertThrows(VendingMachineException.class, () -> machine.removeItem(null));
     }
 
     @Test
@@ -172,6 +187,11 @@ public class VendingMachineTest {
 
         assertFalse(machine.makePurchase("D"));
         assertEquals(5.00, machine.getBalance(), 0.001);
+    }
+
+    @Test
+    void testMakePurchaseNullCode(){
+        assertThrows(VendingMachineException.class, () -> machine.makePurchase(null));
     }
 
     @Test
