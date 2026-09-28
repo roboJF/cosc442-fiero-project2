@@ -27,8 +27,7 @@ public class VendingMachineItem {
 		if (price < 0) {
 			throw new VendingMachineException(PRICE_LESS_THAN_ZERO_MESSAGE);
 		} else {
-			// INJECTED FAULT FOR TEST VALIDATION
-			this.price = price + 1;
+			this.price = price;
 		}
 	}
 
