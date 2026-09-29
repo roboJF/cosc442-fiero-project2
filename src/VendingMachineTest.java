@@ -1,6 +1,5 @@
 import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,6 +15,8 @@ public class VendingMachineTest {
         coke = new VendingMachineItem("Coke", 1.49);
     }
 
+    //-------------------- VendingMachine() --------------------
+
     @Test
     void testConstructorNoBalance(){
         double balance = machine.getBalance();
@@ -30,6 +31,8 @@ public class VendingMachineTest {
         assertNull(machine.getItem("C"));
         assertNull(machine.getItem("D"));
     }
+
+    //-------------------- addItem() --------------------
 
     @Test
     void testAddItem(){
@@ -59,6 +62,8 @@ public class VendingMachineTest {
         assertThrows(VendingMachineException.class, () -> machine.addItem(coke, null));
     }
 
+    //-------------------- getItem() --------------------
+
     @Test
     void testGetItem(){
         machine.addItem(coke, "A");
@@ -81,6 +86,8 @@ public class VendingMachineTest {
     void testGetItemNullCode() {
         assertThrows(VendingMachineException.class, () -> machine.addItem(coke, null));
     }
+
+    //-------------------- removeItem() --------------------
 
     @Test
     void testRemoveItem() {
@@ -105,6 +112,8 @@ public class VendingMachineTest {
     void testRemoveItemNullCode(){
         assertThrows(VendingMachineException.class, () -> machine.removeItem(null));
     }
+
+    //-------------------- insertMoney() --------------------
 
     @Test
     void testInsertMoneyPositive(){
@@ -133,6 +142,8 @@ public class VendingMachineTest {
         assertEquals(0.00, machine.getBalance(), 0.001);
     }
 
+    //-------------------- getBalance() --------------------
+
     @Test
     void testGetBalanceNew(){
         assertEquals(0.00, machine.getBalance(), 0.001);
@@ -143,6 +154,8 @@ public class VendingMachineTest {
         machine.insertMoney(10.00);
         assertEquals(10.00, machine.getBalance(), 0.001);
     }
+
+    //-------------------- makePurchase() --------------------
 
     @Test
     void testMakePurchase(){
@@ -164,8 +177,6 @@ public class VendingMachineTest {
         assertEquals(1.00, machine.getBalance(), 0.001);
     }
 
-    //this wasnt in my TEST_PLAN.md, i realized i should've added it while writing these
-    //i dont really want to go back and edit it since to me, the plan should be set in stone, so whoops!
     @Test
     void testMakePurchaseExact(){
         machine.addItem(coke, "B");
@@ -193,6 +204,8 @@ public class VendingMachineTest {
     void testMakePurchaseNullCode(){
         assertThrows(VendingMachineException.class, () -> machine.makePurchase(null));
     }
+
+    //-------------------- returnChange() --------------------
 
     @Test
     void testReturnChange(){

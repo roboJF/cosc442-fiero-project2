@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class VendingMachineExceptionTest {
     
+    //-------------------- VendingMachineException --------------------
+
     @Test 
     void testVendingMachineException() {
         VendingMachineException ex = new VendingMachineException();
@@ -23,7 +25,6 @@ public class VendingMachineExceptionTest {
         assertEquals(message, ex.getMessage());
     }
 
-    //this is another one i forgot to put into TEST_PLAN.md, and its the last one too!!!
     @Test
     void testVendingMachineExceptionEmpty(){
         //You feel as if nothing has happened...

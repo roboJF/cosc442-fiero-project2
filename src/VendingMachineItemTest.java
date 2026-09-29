@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class VendingMachineItemTest {
 
+    //-------------------- VendingMachineItem() --------------------
+
     @Test
     void testVendingMachineItemConstructor(){
         VendingMachineItem coke = new VendingMachineItem("Coke", 1.49);
@@ -30,12 +32,16 @@ public class VendingMachineItemTest {
         assertEquals(0.00, coke.getPrice(), 0.001);
     }
 
+    //-------------------- getName() --------------------
+
     @Test
     void testGetName(){
         VendingMachineItem coke = new VendingMachineItem("Coke", 1.49);
 
         assertEquals("Coke", coke.getName());
     }
+
+    //-------------------- getPrice() --------------------
 
     @Test
     void testGetPrice(){
